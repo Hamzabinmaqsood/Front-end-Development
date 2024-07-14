@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', 'Times New Roman', Times, serif;
+        }
+
+        .nav-item {
+            color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: #2c3e50;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-link {
+            color: white;
+            font-size: 1rem;
+            margin-right: 15px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #0a8492;
+        }
+
+        .btn-primary {
+            background-color: #0a8492;
+            border-color: rgb(247, 241, 241);
+        }
+
+        .btn-primary:hover {
+            background-color: #0a8492;
+            border-color: #0a8492;
+        }
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            transition: background-image 1s ease-in-out;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .slideshow-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 2;
+        }
+
+        .slideshow-controls button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .slideshow-controls button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .about-and-how-section,
+        .about-section,
+        .how-it-works-section,
+        .services-section {
+            padding: 60px 0;
+        }
+
+        .about-section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+
+        .about-card {
+            background-color: #f8f9fa;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .about-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-card-body {
+            padding: 20px;
+        }
+
+        .about-card-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .about-card-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #34495e;
+        }
+
+        .about-step-icon {
+            font-size: 4rem;
+            color: #0a8492;
+            margin-bottom: 20px;
+        }
+
+
+        .services-section .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .services-section .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            /* Add transition for smooth effect */
+        }
+
+        .services-section .card i {
+            color: #0a8492;
+        }
+
+        .services-section .card-title {
+            font-weight: bold;
+            color: black;
+        }
+
+        .services-section .card-text {
+            color: black;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .features-section {
+            padding: 60px 0;
+        }
+
+        .features-section .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .features-section .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .features-section .card i {
+            color: #0a8492;
+        }
+
+        .features-section .card-title {
+            font-weight: bold;
+            color: black;
+        }
+
+        .features-section .card-text {
+            color: black;
+        }
+
+        @media (max-width: 767px) {
+            .features-section .card {
+                margin-bottom: 20px;
+            }
+        }
+
+        .footer-section a {
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons a {
+            font-size: 1.5rem;
+        }
+
+        .text-center a {
+            color: #ffffff;
+        }
+
+        .testimonials-section {
+            padding: 60px 0;
+            background-color: #f8f9fa;
+        }
+
+        .testimonials-section .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .testimonials-section .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonials-section .testimonial-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .testimonials-section .card-title {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .testimonials-section .card-text {
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 767px) {
+            .testimonials-section .card {
+                margin-bottom: 20px;
+            }
+        }
+
+        .pricing-section {
+            padding: 60px 0;
+            background-color: #f8f9fa;
+        }
+
+        .pricing-section .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pricing-section .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .pricing-section .card-header {
+            border-radius: 15px 15px 0 0;
+            padding: 20px;
+        }
+
+        .pricing-section .price {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .pricing-section .card-body {
+            padding: 20px;
+        }
+
+        .pricing-section .card-body ul {
+            padding-left: 0;
+            list-style: none;
+            margin: 0;
+        }
+
+        .pricing-section .card-body ul li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-section .card-body ul li i {
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .pricing-section .btn {
+            margin-top: 20px;
+        }
+
+        .faq-section {
+            padding: 60px 0;
+            background-color: #ffffff;
+        }
+
+        .section-title {
+            color: #343a40;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            border: none;
+        }
+
+        .card-header h5 {
+            margin: 0;
+        }
+
+        .card-header button {
+            width: 100%;
+            text-align: left;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .card-body {
+            border-top: 1px solid #dee2e6;
+        }
+
+        .social-icons li {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .social-icons li a {
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+        .social-icons li a:hover {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+
+
+        /* General section styling */
+        .section {
+            background-color: #E6E6FA;
+            /* Light lavender background */
+            padding: 60px 0;
+            /* Add padding for spacing */
+            position: relative;
+        }
+
+        /* Section borders for separation */
+        .section:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            border-bottom: 2px solid #5D3FD3;
+            /* Dark purple border */
+        }
+
+
+
+        .news-section {
+            background-color: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .news-card {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <img src="logo.png" alt="Company Logo" width="120" height="80">
+            <!-- <a class="navbar-brand" href="Logo.jpg">YourLogo</a> -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary ml-3" href="#signup">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary ml-3" href="#login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero-section" id="home">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Welcome to Our Service</h1>
+            <p>Your reliable partner for all your needs</p>
+            <a href="#Services" class="btn btn-hero btn-lg" style="color: #f8f9fa;">Learn More</a>
+        </div>
+        <div class="slideshow-controls">
+            <button class="prev" onclick="changeImage(-1)">&#10094;</button>
+            <button class="next" onclick="changeImage(1)">&#10095;</button>
+        </div>
+
+        <script>
+            const images = [
+                'url("1.jpg")',
+                'url("2.jpg")',
+                'url("5.jpg")',
+                'url("6.jpg")',
+                'url("7.jpg")'
+            ];
+
+            let currentIndex = 0;
+            const heroSection = document.querySelector('.hero-section');
+
+            function changeImage(n) {
+                currentIndex = (currentIndex + n + images.length) % images.length;
+                heroSection.style.backgroundImage = images[currentIndex];
+            }
+
+            function autoChangeImage() {
+                changeImage(1);
+                setTimeout(autoChangeImage, 3000);
+            }
+
+            // Initial background image
+            heroSection.style.backgroundImage = images[currentIndex];
+
+            // Start the automatic slideshow
+            setTimeout(autoChangeImage, 3000);
+
+        </script>
+    </section>
+
+    <section class="about-and-how-section section" id="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="about-card text-center">
+                        <div class="about-card-body">
+                            <i class="about-step-icon fas fa-bullseye"></i>
+                            <h3 class="about-card-title">Our Mission</h3>
+                            <p class="about-card-text">Our mission is to provide exceptional services that exceed our
+                                customers' expectations.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="about-card text-center">
+                        <div class="about-card-body">
+                            <i class="about-step-icon fas fa-handshake"></i>
+                            <h3 class="about-card-title">Our Values</h3>
+                            <p class="about-card-text">Integrity, Excellence, and Customer Satisfaction are at the core
+                                of everything we do.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="about-card text-center">
+                        <div class="about-card-body">
+                            <i class="about-step-icon fas fa-history"></i>
+                            <h3 class="about-card-title">Our History</h3>
+                            <p class="about-card-text">Established in [Year], our company has grown from a small startup
+                                to a leading provider in the industry.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="about-card text-center">
+                        <div class="about-card-body">
+                            <i class="about-step-icon fas fa-user-plus"></i>
+                            <h3 class="about-card-title">Sign Up</h3>
+                            <p class="about-card-text">Create an account to get started. It's quick and easy for both
+                                drivers and customers.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="about-card text-center">
+                        <div class="about-card-body">
+                            <i class="about-step-icon fas fa-search"></i>
+                            <h3 class="about-card-title">Find a Match</h3>
+                            <p class="about-card-text">Search for available trips or customers based on your preferences
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="about-card text-center">
+                        <div class="about-card-body">
+                            <i class="about-step-icon fas fa-truck-moving"></i>
+                            <h3 class="about-card-title">Book a Trip</h3>
+                            <p class="about-card-text">Drivers and customers can book trips and manage their schedules
+                                seamlessly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-2 section services-section" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-truck fa-3x mb-3"></i>
+                            <h5 class="card-title">Truck Management</h5>
+                            <p class="card-text">Efficiently manage truck trips and schedules with our comprehensive
+                                system.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-map-marker-alt fa-3x mb-3"></i>
+                            <h5 class="card-title">Real-Time Tracking</h5>
+                            <p class="card-text">Track your trucks in real-time and ensure timely deliveries with our
+                                GPS tracking feature.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-clipboard-list fa-3x mb-3"></i>
+                            <h5 class="card-title">Inventory Management</h5>
+                            <p class="card-text">Manage customer inventories and keep track of all items with ease.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-comments fa-3x mb-3"></i>
+                            <h5 class="card-title">Complaint Handling</h5>
+                            <p class="card-text">Efficiently handle customer complaints and ensure satisfaction.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-dollar-sign fa-3x mb-3"></i>
+                            <h5 class="card-title">Salary Management</h5>
+                            <p class="card-text">Manage driver salaries and bonuses with our streamlined system.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-tools fa-3x mb-3"></i>
+                            <h5 class="card-title">Workshop Management</h5>
+                            <p class="card-text">Schedule and manage truck maintenance with our workshop management
+                                feature.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section section" id="features">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i id="feature-icon-1" class="fas fa-map-marked-alt fa-3x mb-3"></i>
+                            <h5 class="card-title">Real-Time GPS Tracking</h5>
+                            <p class="card-text">Track your vehicles and deliveries in real-time with our advanced GPS
+                                tracking system.</p>
+                            <button onclick="toggleIcon('feature-icon-1')" class="btn btn-primary">Toggle Icon</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i id="feature-icon-2" class="fas fa-lock fa-3x mb-3"></i>
+                            <h5 class="card-title">Secure Payment Systems</h5>
+                            <p class="card-text">Ensure secure transactions with our reliable and encrypted payment
+                                gateways.</p>
+                            <button onclick="toggleIcon('feature-icon-2')" class="btn btn-primary">Toggle Icon</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i id="feature-icon-3" class="fas fa-laptop fa-3x mb-3"></i>
+                            <h5 class="card-title">User-Friendly Interfaces</h5>
+                            <p class="card-text">Enjoy an intuitive and easy-to-use platform designed for both drivers
+                                and customers.</p>
+                            <button onclick="toggleIcon('feature-icon-3')" class="btn btn-primary">Toggle Icon</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- New Key Feature 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-shield-alt fa-3x mb-3"></i>
+                            <h5 class="card-title">Advanced Security Features</h5>
+                            <p class="card-text">Protect your data with our cutting-edge security protocols and
+                                features.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Key Feature 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-cloud fa-3x mb-3"></i>
+                            <h5 class="card-title">Cloud Integration</h5>
+                            <p class="card-text">Access your data anytime, anywhere with our seamless cloud integration.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Key Feature 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-bell fa-3x mb-3"></i>
+                            <h5 class="card-title">Instant Notifications</h5>
+                            <p class="card-text">Stay informed with real-time notifications for all important updates
+                                and alerts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Testimonials</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <img src="11.jpg" alt="Customer 1" class="testimonial-img rounded-circle mb-3">
+                            <h5 class="card-title">John Doe</h5>
+                            <p class="card-text">"This service has been a game-changer for our business. The real-time
+                                tracking feature is incredibly reliable."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <img src="12.jpg" alt="Driver 1" class="testimonial-img rounded-circle mb-3">
+                            <h5 class="card-title">Jane Smith</h5>
+                            <p class="card-text">"I love the user-friendly interface. It makes my job so much easier and
+                                more efficient."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <img src="13.jpg" alt="Customer 2" class="testimonial-img rounded-circle mb-3">
+                            <h5 class="card-title">Alice Johnson</h5>
+                            <p class="card-text">"The secure payment system gives me peace of mind. Highly recommend
+                                this service to anyone."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-section section" id="pricing">
+        <div class="container">
+            <h2 class="section-title text-center mb-4">Pricing Plans</h2>
+            <div class="row">
+                <!-- Basic Plan -->
+                <div class="col-md-4 mb-4">
+                    <div class="card pricing-card text-center">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="card-title">Basic</h3>
+                            <p class="price">$9.99/month</p>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success"></i> Real-time GPS Tracking</li>
+                                <li><i class="fas fa-check text-success"></i> Secure Payment Processing</li>
+                                <li><i class="fas fa-check text-success"></i> Customer Support via Email</li>
+                                <li><i class="fas fa-times text-danger"></i> Advanced Analytics</li>
+                                <li><i class="fas fa-times text-danger"></i> Dedicated Account Manager</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary btn-block">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Standard Plan -->
+                <div class="col-md-4 mb-4">
+                    <div class="card pricing-card text-center">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="card-title">Standard</h3>
+                            <p class="price">$19.99/month</p>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success"></i> Real-time GPS Tracking</li>
+                                <li><i class="fas fa-check text-success"></i> Secure Payment Processing</li>
+                                <li><i class="fas fa-check text-success"></i> Customer Support via Email</li>
+                                <li><i class="fas fa-check text-success"></i> Advanced Analytics</li>
+                                <li><i class="fas fa-times text-danger"></i> Dedicated Account Manager</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary btn-block">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Premium Plan -->
+                <div class="col-md-4 mb-4">
+                    <div class="card pricing-card text-center">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="card-title">Premium</h3>
+                            <p class="price">$29.99/month</p>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success"></i> Real-time GPS Tracking</li>
+                                <li><i class="fas fa-check text-success"></i> Secure Payment Processing</li>
+                                <li><i class="fas fa-check text-success"></i> Customer Support via Email</li>
+                                <li><i class="fas fa-check text-success"></i> Advanced Analytics</li>
+                                <li><i class="fas fa-check text-success"></i> Dedicated Account Manager</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary btn-block">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section section" id="contact">
+        <div class="container">
+            <div class="row">
+                <!-- Contact Form -->
+                <div class="col-md-6 mb-4">
+                    <h2 class="section-title mb-4">Contact Us</h2>
+                    <form id="contactForm" method="post" action="send-email.php">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="col-md-6 mb-4">
+                    <h2 class="section-title mb-4">Contact Information</h2>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-phone"></i> Phone: +1 234 567 890</li>
+                        <li><i class="fas fa-envelope"></i> Email: info@example.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Address: 123 Example St, City, Country</li>
+                    </ul>
+
+                    <!-- Google Maps Embed (Replace with your Google Maps embed code) -->
+                    <div class="embed-responsive embed-responsive-16by9 mt-4">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d410.45779643560974!2d73.46799877253814!3d34.376463485498675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2snl!4v1720512108100!5m2!1sen!2snl"
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-section bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <!-- About Us -->
+                <div class="col-md-3">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="mailto:hbinmaqsood@gmail.com"><i class="fas fa-envelope"></i>Mail Us</a></li>
+                        <li><a href="tel:+923473144690"><i class="fas fa-phone"></i> Call Us</a></li>
+                        <li><a href="https://wa.me/03473144690"><i class="fab fa-whatsapp"></i> Whatsapp Us</a></li>
+                    </ul>
+
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#shop">Shop</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal Pages -->
+                <div class="col-md-3">
+                    <h5>Legal Pages</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#privacy-policy">Privacy Policy</a></li>
+                        <li><a href="#terms-of-service">Terms of Service</a></li>
+                        <li><a href="#return-policy">Return Policy</a></li>
+                        <li><a href="#shipment-policy">Shipment Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-md-3">
+                    <h5>Newsletter</h5>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Enter your email">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                    <div class="social-icons mt-3">
+                        <a href="#" class="text-white mr-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4 mb-3">
+            <div class="text-center">
+                <p>&copy; 2024 Hamza Bin Maqsood | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleIcon(iconId) {
+            const iconElement = document.getElementById(iconId);
+            if (iconElement.classList.contains('fa-map-marked-alt')) {
+                iconElement.classList.remove('fa-map-marked-alt');
+                iconElement.classList.add('fa-map-marker-alt');
+            } else if (iconElement.classList.contains('fa-lock')) {
+                iconElement.classList.remove('fa-lock');
+                iconElement.classList.add('fa-unlock');
+            } else if (iconElement.classList.contains('fa-laptop')) {
+                iconElement.classList.remove('fa-laptop');
+                iconElement.classList.add('fa-desktop');
+            } else if (iconElement.classList.contains('fa-map-marker-alt')) {
+                iconElement.classList.remove('fa-map-marker-alt');
+                iconElement.classList.add('fa-map-marked-alt');
+            } else if (iconElement.classList.contains('fa-unlock')) {
+                iconElement.classList.remove('fa-unlock');
+                iconElement.classList.add('fa-lock');
+            } else if (iconElement.classList.contains('fa-desktop')) {
+                iconElement.classList.remove('fa-desktop');
+                iconElement.classList.add('fa-laptop');
+            }
+        }
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
